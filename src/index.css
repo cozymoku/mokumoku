@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary-light: #e8a990;
+}
+
+html,
+body {
+  background-color: var(--color-primary-light);
+}
