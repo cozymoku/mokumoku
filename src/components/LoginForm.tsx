@@ -1,17 +1,22 @@
 // src/components/LoginForm.tsx
 import { useState } from 'react';
-import type { FormEvent } from 'react';
+import type { FormEvent } from 'react'; // 'type' 키워드 사용으로 오류 해결
+import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
   const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [password, setPassword] = useState<string>(''); // password 상태 추가
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false); // 로딩 상태 추가
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
-    setLoading(true); // 로딩 시작
+    setLoading(true);
 
     try {
       const response = await fetch('/api/login', {
@@ -23,23 +28,20 @@ function LoginForm() {
       });
 
       if (response.ok) {
-        // HTTP 상태 코드가 200-299 범위인 경우
         const data = await response.json();
         console.log('Login successful:', data);
-        alert('로그인 성공!');
-        // 실제 애플리케이션에서는 로그인 후 페이지 이동 등의 로직을 추가합니다.
+        login(data.token || 'mock-token'); // 토큰이 있다면 사용, 없다면 모의 토큰
+        navigate('/dashboard'); // 대시보드 페이지로 이동
       } else {
-        // HTTP 상태 코드가 200-299 범위가 아닌 경우 (예: 401 Unauthorized)
         const errorData = await response.json();
-        setError(errorData.message || '로그인 실패: 알 수 없는 오류');
+        setError(errorData.message || '이메일 또는 비밀번호가 올바르지 않습니다.');
         console.error('Login failed:', errorData);
       }
     } catch (err) {
-      // 네트워크 오류 등 예외 발생 시
       setError('네트워크 오류가 발생했습니다. 다시 시도해주세요.');
       console.error('Network error during login:', err);
     } finally {
-      setLoading(false); // 로딩 종료
+      setLoading(false);
     }
   };
 
@@ -57,16 +59,16 @@ function LoginForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-        disabled={loading} // 로딩 중일 때 입력 비활성화
+        disabled={loading}
       />
-      <input
+      <input // password 필드 추가
         type="password"
         placeholder="Password"
         className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
-        disabled={loading} // 로딩 중일 때 입력 비활성화
+        disabled={loading}
       />
 
       {error && (
@@ -78,9 +80,9 @@ function LoginForm() {
       <button
         type="submit"
         className="w-full bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2.5 rounded-lg transition duration-300 ease-in-out text-sm"
-        disabled={loading} // 로딩 중일 때 버튼 비활성화
+        disabled={loading}
       >
-        {loading ? '로그인 중...' : 'Login'} {/* 로딩 텍스트 추가 */}
+        {loading ? '로그인 중...' : 'Login'}
       </button>
 
       <div className="relative flex items-center justify-center py-3">
@@ -89,12 +91,12 @@ function LoginForm() {
         <div className="flex-grow border-t border-gray-300"></div>
       </div>
 
-      <div className="flex justify-center mt-3">
+      <div className="flex justify-center mt-3"> {/* 단일 Google 로그인 버튼으로 변경 */}
         <button
           type="button"
           className="flex items-center justify-center px-4 py-2.5 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition duration-300 ease-in-out w-full text-sm"
           onClick={handleGoogleLogin}
-          disabled={loading} // 로딩 중일 때 버튼 비활성화
+          disabled={loading}
         >
           <span className="text-lg mr-2">G</span>
           Google

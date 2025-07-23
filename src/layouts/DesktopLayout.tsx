@@ -1,6 +1,6 @@
 // src/layouts/DesktopLayout.tsx
-import React, { useMemo } from 'react';
-import type { ReactNode } from 'react';
+import React, { useMemo } from 'react'; // React 임포트 (아직 사용하지 않아도 일단 유지)
+import type { ReactNode } from 'react'; // 'type' 키워드 사용으로 오류 해결
 
 interface DesktopLayoutProps {
   children: ReactNode;
@@ -16,10 +16,10 @@ const BLOB_COLOR_SETS = [
   ['bg-[#f2f2f2]', 'bg-[#abcdef]', 'bg-[#123456]'], // HEX 코드 사용 예시
 ];
 
-const BLOB_SIZES = ['w-48 h-48', 'w-56 h-56', 'w-64 h-64', 'w-72 h-72']; // 크기 옵션 유지
+const BLOB_SIZES = ['w-48 h-48', 'w-56 h-56', 'w-64 h-64', 'w-72 h-72'];
 const BLOB_POSITIONS = [
-  'top-0 left-0', 'top-0 right-0', // 우측 상단 추가
-  'bottom-0 left-0', 'bottom-0 right-0', // 좌측 하단 추가
+  'top-0 left-0', 'top-0 right-0',
+  'bottom-0 left-0', 'bottom-0 right-0',
   'top-1/4 left-1/4', 'top-1/2 left-1/2',
   'bottom-1/4 right-1/4', 'bottom-1/2 right-1/2',
   'top-1/3 left-1/3', 'bottom-1/3 right-1/3',
@@ -44,7 +44,7 @@ const getRandomBorderRadius = () => {
 
 function DesktopLayout({ children }: DesktopLayoutProps) {
   const randomBlobs = useMemo(() => {
-    const numBlobs = Math.floor(Math.random() * 3) + 2; // 블롭 2~4개 랜덤 생성
+    const numBlobs = Math.floor(Math.random() * 3) + 2;
     const selectedColorSet = BLOB_COLOR_SETS.at(Math.floor(Math.random() * BLOB_COLOR_SETS.length))!;
     const blobs = [];
 
@@ -52,8 +52,8 @@ function DesktopLayout({ children }: DesktopLayoutProps) {
       const randomColor = selectedColorSet.at(i % selectedColorSet.length)!;
       const randomSize = BLOB_SIZES.at(Math.floor(Math.random() * BLOB_SIZES.length))!;
       const randomPosition = BLOB_POSITIONS.at(Math.floor(Math.random() * BLOB_POSITIONS.length))!;
-      const randomDelay = `${Math.floor(Math.random() * 4000)}ms`; // 애니메이션 딜레이
-      const randomBorderRadius = getRandomBorderRadius(); // 불규칙한 원형 모양
+      const randomDelay = `${Math.floor(Math.random() * 4000)}ms`;
+      const randomBorderRadius = getRandomBorderRadius();
 
       blobs.push({
         color: randomColor,
@@ -79,19 +79,19 @@ function DesktopLayout({ children }: DesktopLayoutProps) {
             </span>
           </div>
 
-          <div className="flex flex-col items-center mb-6"> {/* mb-8에서 mb-6으로 조정 */}
+          <div className="flex flex-col items-center mb-6">
             <div className="w-16 h-16 rounded-full bg-purple-200 flex items-center justify-center mb-4">
               <span className="text-purple-700 text-3xl font-bold"></span>
             </div>
             <h1 className="text-4xl font-bold text-gray-800 mb-2">WELCOME!</h1>
-            <p className="text-center text-gray-600 text-sm leading-relaxed max-w-xs mb-4"> {/* max-w-xs 유지, mb-4 추가 */}
+            <p className="text-center text-gray-600 text-sm leading-relaxed max-w-xs mb-4">
               Log in to access your customized mindfulness exercises, track your progress, and unlock new insights into your mental wellbeing.
             </p>
           </div>
           
           {children}
 
-          <div className="mt-6 text-center text-xs text-gray-500"> {/* mt-8에서 mt-6으로 조정 */}
+          <div className="mt-6 text-center text-xs text-gray-500">
             By proceeding, you agree to our <a href="#" className="underline text-purple-600">Terms of use</a>.<br/>
             Read our <a href="#" className="underline text-purple-600">Privacy Policy</a>
           </div>

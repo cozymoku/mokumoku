@@ -1,5 +1,5 @@
 // src/layouts/MobileLayout.tsx
-import type { ReactNode } from 'react';
+import type { ReactNode } from 'react'; // 'type' 키워드 사용으로 오류 해결
 
 interface MobileLayoutProps {
   children: ReactNode;
