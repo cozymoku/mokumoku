@@ -1,6 +1,6 @@
 // src/contexts/AuthContext.tsx
 import React, { createContext, useContext, useState } from 'react';
-import type { ReactNode } from 'react'; // 'type' 키워드 사용으로 오류 해결
+import type { ReactNode } from 'react';
 
 interface AuthContextType {
   isLoggedIn: boolean;
@@ -11,16 +11,24 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  // 초기 로그인 상태를 localStorage에서 확인
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+    const token = localStorage.getItem('userToken');
+    return !!token; // 토큰이 있으면 true, 없으면 false
+  });
 
+  // 로그인 함수: 토큰을 localStorage에 저장하고 상태 업데이트
   const login = (token: string) => {
-    console.log('User logged in with token:', token);
+    localStorage.setItem('userToken', token); // 토큰 저장
     setIsLoggedIn(true);
+    console.log('User logged in with token:', token);
   };
 
+  // 로그아웃 함수: localStorage에서 토큰 제거하고 상태 업데이트
   const logout = () => {
-    console.log('User logged out');
+    localStorage.removeItem('userToken'); // 토큰 제거
     setIsLoggedIn(false);
+    console.log('User logged out');
   };
 
   return (

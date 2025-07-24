@@ -1,12 +1,12 @@
 // src/components/LoginForm.tsx
 import { useState } from 'react';
-import type { FormEvent } from 'react'; // 'type' 키워드 사용으로 오류 해결
+import type { FormEvent } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
   const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>(''); // password 상태 추가
+  const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -61,7 +61,7 @@ function LoginForm() {
         required
         disabled={loading}
       />
-      <input // password 필드 추가
+      <input
         type="password"
         placeholder="Password"
         className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
@@ -91,7 +91,7 @@ function LoginForm() {
         <div className="flex-grow border-t border-gray-300"></div>
       </div>
 
-      <div className="flex justify-center mt-3"> {/* 단일 Google 로그인 버튼으로 변경 */}
+      <div className="flex justify-center mt-3">
         <button
           type="button"
           className="flex items-center justify-center px-4 py-2.5 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition duration-300 ease-in-out w-full text-sm"

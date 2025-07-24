@@ -1,6 +1,6 @@
 // src/components/MobileBottomNav.tsx
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom'; // NavLink를 사용하여 활성 상태 강조
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 function MobileBottomNav() {
@@ -22,7 +22,7 @@ function MobileBottomNav() {
             ${isActive ? 'text-purple-600' : 'hover:text-purple-500'}`
           }
         >
-          <span className="text-xl">📊</span> {/* 아이콘 (이모지 또는 실제 아이콘 폰트/라이브러리 사용) */}
+          <span className="text-xl">📊</span>
           대시보드
         </NavLink>
         <NavLink

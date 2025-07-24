@@ -1,8 +1,7 @@
 // src/layouts/AuthenticatedLayout.tsx
-import React  from 'react'; // useState 제거 (더 이상 햄버거 메뉴 토글이 없음)
-import type { ReactNode } from 'react'; // useState 제거 (더 이상 햄버거 메뉴 토글이 없음)
+import React, { ReactNode } from 'react';
 import SidebarMenu from '../components/SidebarMenu';
-import MobileBottomNav from '../components/MobileBottomNav'; // MobileBottomNav 임포트
+import MobileBottomNav from '../components/MobileBottomNav';
 
 interface AuthenticatedLayoutProps {
   children: ReactNode;
