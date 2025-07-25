@@ -8,7 +8,7 @@ interface MobileLayoutProps {
 function MobileLayout({ children }: MobileLayoutProps) {
   return (
     <div className="min-h-screen flex md:hidden items-center justify-center bg-gray-100 p-2">
-      <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden
+      <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden bg-gray-100
                       flex flex-col w-full max-w-sm h-auto px-5 py-6">
 
         <div className="absolute top-3 right-3">

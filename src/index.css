@@ -1,10 +1,57 @@
 @import "tailwindcss";
 
-:root {
-  --color-primary-light: #e8a990;
+/* src/index.css */
+
+/* RixYeoljeongdo_Regular 폰트 임포트 */
+@font-face {
+    font-family: 'GowunDodum-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
-html,
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* body에 Spoqa Han Sans Neo 폰트 적용 */
 body {
-  background-color: var(--color-primary-light);
+  font-family: 'GowunDodum-Regular', sans-serif; /* 새로운 폰트 적용 */
+  color: #333; /* 기존에 설정한 글자색 유지 또는 조정 */
+}
+
+/* 추가적인 전역 스타일 (이전에 있었던 내용 유지) */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Scrollbar styling (이전에 추가했다면) */
+/* Webkit (Chrome, Safari, Edge) scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px; /* For vertical scrollbar */
+  height: 8px; /* For horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the tracking area */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scroll thumb */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color when hovering over the scroll thumb */
+}
+
+/* Firefox scrollbar styling */
+/* For Firefox, you might need to use custom scrollbar properties if available,
+   or rely on default browser scrollbars. */
+html {
+  scrollbar-color: #888 #f1f1f1; /* thumb and track color */
+  scrollbar-width: thin; /* auto | thin | none */
 }

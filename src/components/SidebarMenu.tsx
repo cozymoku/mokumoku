@@ -28,8 +28,8 @@ function SidebarMenu() {
             </Link>
           </li>
           <li className="mb-2">
-            <Link to="/settings" className="block p-2 rounded hover:bg-gray-700">
-              설정
+            <Link to="/recitation" className="block p-2 rounded hover:bg-gray-700"> {/* 경로 및 텍스트 변경 */}
+              암송
             </Link>
           </li>
         </ul>

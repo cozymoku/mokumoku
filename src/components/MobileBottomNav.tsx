@@ -36,14 +36,14 @@ function MobileBottomNav() {
           프로필
         </NavLink>
         <NavLink
-          to="/settings"
+          to="/recitation" // 경로 및 텍스트 변경
           className={({ isActive }) =>
             `flex flex-col items-center justify-center p-2 rounded-md transition-colors duration-200
             ${isActive ? 'text-purple-600' : 'hover:text-purple-500'}`
           }
         >
-          <span className="text-xl">⚙️</span>
-          설정
+          <span className="text-xl">📖</span> {/* 아이콘 변경 (성경책 이모지) */}
+          암송
         </NavLink>
         <button
           onClick={handleLogout}

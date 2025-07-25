@@ -1,50 +1,30 @@
 // src/layouts/DesktopLayout.tsx
-import React from 'react'; // useMemo는 AnimatedBlobBackground로 이동했으므로 제거
-import type { ReactNode } from 'react';
-import AnimatedBlobBackground from '../components/AnimatedBlobBackground'; // 새로 만든 컴포넌트 임포트
+import React from 'react';
+import AnimatedBlobBackground from '../components/AnimatedBlobBackground';
 
-interface DesktopLayoutProps {
-  children: ReactNode;
-}
-
-function DesktopLayout({ children }: DesktopLayoutProps) {
-  // randomBlobs 관련 로직은 AnimatedBlobBackground로 이동했으므로 제거
-
+function DesktopLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen hidden md:flex items-center justify-center bg-gray-100 p-4">
-      <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden
-                      flex flex-row w-full max-w-4xl min-h-[580px] max-h-[90vh]">
-
-        {/* Left Section: Login Form Container */}
-        <div className="w-1/2 p-8 flex flex-col items-center justify-between">
-          <div className="self-end mb-4">
-            <span className="text-sm font-semibold text-purple-600 border border-purple-300 rounded-full px-4 py-1">
-              SIGN UP
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center mb-6">
-            <div className="w-16 h-16 rounded-full bg-purple-200 flex items-center justify-center mb-4">
-              <span className="text-purple-700 text-3xl font-bold"></span>
-            </div>
-            <h1 className="text-4xl font-bold text-gray-800 mb-2">WELCOME!</h1>
-            <p className="text-center text-gray-600 text-sm leading-relaxed max-w-xs mb-4">
-              Log in to access your customized mindfulness exercises, track your progress, and unlock new insights into your mental wellbeing.
-            </p>
-          </div>
-          
-          {children}
-
-          <div className="mt-6 text-center text-xs text-gray-500">
-            By proceeding, you agree to our <a href="#" className="underline text-purple-600">Terms of use</a>.<br/>
-            Read our <a href="#" className="underline text-purple-600">Privacy Policy</a>
-          </div>
+    // 전체 화면 컨테이너: 가로 방향으로 아이템 배치, 세로 중앙 정렬, 우측으로 아이템 밀기
+    <div className="hidden md:flex flex-row items-center justify-end h-screen w-full overflow-hidden">
+      
+      {/* 로그인 폼 컨테이너 (좌측 절반):
+        absolute left-0를 사용하여 부모의 좌측에 고정 배치합니다.
+        z-10으로 AnimatedBlobBackground 위에 오도록 합니다.
+      */}
+      <div className="flex items-center justify-center w-1/2 h-full p-8 absolute left-0">
+        <div className="relative z-10 bg-white p-8 rounded-lg w-full max-w-md">
+          {children} {/* LoginForm이 여기에 렌더링됩니다. */}
         </div>
-
-        {/* Right Section: Decorative Background (분리된 컴포넌트 사용) */}
-        <AnimatedBlobBackground /> {/* 여기서 AnimatedBlobBackground 컴포넌트를 렌더링 */}
-
       </div>
+
+      {/* AnimatedBlobBackground 영역 (우측 절반):
+        w-1/2 h-full로 우측 절반을 차지하도록 합니다.
+        AnimatedBlobBackground 컴포넌트 자체는 이 부모 div의 크기에 맞춰집니다.
+      */}
+      <div className="w-1/2 h-full">
+        <AnimatedBlobBackground className="h-full" /> {/* AnimatedBlobBackground를 우측에 배치 */}
+      </div>
+
     </div>
   );
 }

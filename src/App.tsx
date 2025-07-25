@@ -7,7 +7,8 @@ import AuthenticatedLayout from './layouts/AuthenticatedLayout';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
-import Settings from './pages/Settings';
+// import Settings from './pages/Settings'; // Settings 대신 Recitation을 사용하므로 주석 처리하거나 제거
+import Recitation from './pages/Recitation'; // Recitation 컴포넌트 임포트
 
 // 보호된 라우트 컴포넌트
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -21,9 +22,9 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 function App() {
   return (
     <Router>
-      <AuthProvider> {/* AuthProvider로 전체 애플리케이션 감싸기 */}
+      <AuthProvider>
         <Routes>
-          {/* 로그인 페이지: MobileLayout과 DesktopLayout으로 감싸서 렌더링 */}
+          {/* 로그인 페이지 */}
           <Route path="/" element={
             <>
               <MobileLayout>
@@ -35,7 +36,7 @@ function App() {
             </>
           } />
 
-          {/* 인증이 필요한 페이지들: ProtectedRoute로 보호하고 AuthenticatedLayout으로 감싸서 렌더링 */}
+          {/* 인증이 필요한 페이지들 */}
           <Route path="/dashboard" element={
             <ProtectedRoute>
               <AuthenticatedLayout>
@@ -52,10 +53,11 @@ function App() {
             </ProtectedRoute>
           } />
 
-          <Route path="/settings" element={
+          {/* 암송 메뉴 추가 */}
+          <Route path="/recitation" element={
             <ProtectedRoute>
               <AuthenticatedLayout>
-                <Settings />
+                <Recitation />
               </AuthenticatedLayout>
             </ProtectedRoute>
           } />
